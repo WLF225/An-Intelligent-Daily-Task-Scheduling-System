@@ -3,11 +3,14 @@ import com.example.project_1.Classes.Task;
 import com.example.project_1.DataStructures.List;
 import com.example.project_1.DataStructures.Node;
 import com.example.project_1.JavaFX.AlertException;
+import com.example.project_1.JavaFX.Main;
 
 //The class that have the main functionality that do most of the work
 public class Algorithm {
 
-    public static TotalProductivity[][] Knapsack(Task[] tasks, int totalHours){
+    public static TotalProductivity[][] Knapsack(int totalHours){
+
+        Task[] tasks = Main.tasks;
 
         //The array that will have the optimal solutions
         TotalProductivity[][] dp = (TotalProductivity[][]) new TotalProductivity[tasks.length+1][totalHours+1];
@@ -17,7 +20,6 @@ public class Algorithm {
                 dp[i][j] = new TotalProductivity();
             }
         }
-
 
         //To go through all the activities
         for (int i = 0; i < tasks.length; i++) {

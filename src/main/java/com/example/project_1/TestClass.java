@@ -11,7 +11,7 @@ public class TestClass {
                 new Task("Do Homework",4, 12),new Task("Watch Lecture",2, 5),
                 new Task("Read Book",1, 3)};
 
-        Algorithm.TotalProductivity[][] tot = Algorithm.Knapsack(tasks,  24);
+        Algorithm.TotalProductivity[][] tot = Algorithm.Knapsack(24);
 
         for (Algorithm.TotalProductivity[] row : tot) {
             for (Algorithm.TotalProductivity column : row) {

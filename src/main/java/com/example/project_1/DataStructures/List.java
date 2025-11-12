@@ -11,7 +11,7 @@ public class List<E> implements Iterable<E> {
         return size;
     }
 
-    //Use it in the algorithm so I dont need to copy the whole list every time
+    //Use it in the algorithm, so I don't need to copy the whole list every time
     //Note: this method is only used in the algorithm class to make the
     //O(n^3) become O(n^2) and not for always use
     public void copy(E data, List<E> list) {

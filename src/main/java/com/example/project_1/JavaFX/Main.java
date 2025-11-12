@@ -1,6 +1,5 @@
 package com.example.project_1.JavaFX;
 
-import com.example.project_1.Algorithm;
 import com.example.project_1.Classes.Task;
 import javafx.application.Application;
 import javafx.scene.Parent;
@@ -22,6 +21,7 @@ public class Main extends Application {
         scene.getStylesheets().add("style.css");
 
         stage.setMaximized(true);
+        stage.setTitle("Project 1");
         stage.setScene(scene);
         stage.show();
     }

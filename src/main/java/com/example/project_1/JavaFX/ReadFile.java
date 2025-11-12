@@ -103,6 +103,8 @@ public class ReadFile implements EventHandler<ActionEvent> {
                 Main.tasks[i] = tasks[i];
             }
 
+            Main.showInfoAlert("File read successfully!");
+
         } catch (IOException ex) {
             Main.showErrorAlert("Please choose a file to read from!");
         }
