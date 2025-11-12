@@ -61,6 +61,7 @@ public class AddTasks extends BorderPane {
         Button clearButton = new Button("Clear");
         Button addButton = new Button("Add");
         Button backButton = new Button("Back");
+        backButton.getStyleClass().add("secondary");
 
         addButton.getStyleClass().add("primary");
 

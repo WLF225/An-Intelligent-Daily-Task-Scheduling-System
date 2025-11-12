@@ -28,21 +28,32 @@ public class MainMenu extends BorderPane {
 
         //The buttons section
         Button readFromFileB = new Button("Read From File");
+        Button addTaskB = new Button("Add Task");
         Button viewTasksB = new Button("View Tasks");
         Button saveToFileB = new Button("Save To File");
         Button exitB = new Button("Exit");
+        exitB.getStyleClass().add("secondary");
 
+        //To make the buttons larger
         readFromFileB.setStyle("-fx-font-size: 30");
-        readFromFileB.setPrefWidth(250);
-        saveToFileB.setStyle("-fx-font-size: 30");
-        saveToFileB.setPrefWidth(250);
-        viewTasksB.setStyle("-fx-font-size: 30");
-        viewTasksB.setPrefWidth(250);
-        exitB.setStyle("-fx-font-size: 30");
-        exitB.setPrefWidth(250);
+        //To make the buttons the same width as the buttons VBox
+        readFromFileB.setMaxWidth(Double.MAX_VALUE);
 
-        VBox buttonsVB = new VBox(40, readFromFileB, viewTasksB, saveToFileB, exitB);
+        addTaskB.setStyle("-fx-font-size: 30");
+        addTaskB.setMaxWidth(Double.MAX_VALUE);
+
+        saveToFileB.setStyle("-fx-font-size: 30");
+        saveToFileB.setMaxWidth(Double.MAX_VALUE);
+
+        viewTasksB.setStyle("-fx-font-size: 30");
+        viewTasksB.setMaxWidth(Double.MAX_VALUE);
+
+        exitB.setStyle("-fx-font-size: 30");
+        exitB.setMaxWidth(Double.MAX_VALUE);
+
+        VBox buttonsVB = new VBox(40, readFromFileB, addTaskB, viewTasksB, saveToFileB, exitB);
         buttonsVB.setAlignment(Pos.CENTER);
+        buttonsVB.setPrefWidth(350);
         buttonsVB.setPadding(new Insets(0, 0, 0, 100));
 
         setLeft(buttonsVB);
@@ -68,7 +79,6 @@ public class MainMenu extends BorderPane {
         textArea.setMaxWidth(600);
         textArea.setWrapText(true);
 
-
         VBox solutionVB = new VBox(40, calculateH, textArea);
         solutionVB.setAlignment(Pos.CENTER);
 
@@ -79,12 +89,17 @@ public class MainMenu extends BorderPane {
 
         exitB.setOnAction(e -> System.exit(0));
 
-        viewTasksB.setOnAction(e->Main.setScene(new AddTasks()));
+        addTaskB.setOnAction(e -> Main.setScene(new AddTasks()));
+
+        viewTasksB.setOnAction(e -> {
+            if (Main.tasks.length == 0)
+                Main.showErrorAlert("There are no tasks to view!");
+            else
+                Main.setScene(new ViewTasks());
+        });
 
         calculateB.setOnAction(e -> {
-
             try {
-
                 textArea.clear();
 
                 if (hoursTF.getText().isEmpty())
@@ -99,28 +114,23 @@ public class MainMenu extends BorderPane {
                 //To get the optimal solution for the number of hours entered by the user
                 Algorithm.TotalProductivity[][] productivities = Algorithm.Knapsack(hours);
 
-                textArea.appendText("The max number of productivity for "+ hours + " hours is: "+productivities[Main.tasks.length][hours].getTotalProductivity());
+                textArea.appendText("The max number of productivity for " + hours + " hours is: " + productivities[Main.tasks.length][hours].getTotalProductivity());
                 textArea.appendText("\n\nTasks:\n\n");
 
                 //To get the tasks that give the optimal solution printed up
                 Task[] tasks = Algorithm.getTasks(productivities, hours);
 
                 for (Task t : tasks) {
-                    textArea.appendText(t.toString()+"\n\n");
+                    textArea.appendText(t.toString() + "\n\n");
                 }
 
                 hoursTF.clear();
 
-            }catch (AlertException ex){
+            } catch (AlertException ex) {
                 Main.showErrorAlert(ex.getMessage());
             }
-
         });
-
-
     }
-
-
 }
 
 
