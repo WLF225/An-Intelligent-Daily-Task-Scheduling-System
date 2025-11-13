@@ -1,8 +1,6 @@
 package com.example.project_1;
 
 import com.example.project_1.Classes.Task;
-import com.example.project_1.DataStructures.List;
-import com.example.project_1.DataStructures.Node;
 import com.example.project_1.JavaFX.AlertException;
 import com.example.project_1.JavaFX.Main;
 

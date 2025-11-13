@@ -112,7 +112,7 @@
 }
 
 .label.subheader {
-    -fx-font-size: 24px;
+    -fx-font-size: 20px;
     -fx-font-weight: bold;
     -fx-text-fill: #007786;
 }
@@ -342,57 +342,7 @@
 /* ===== SCROLL PANE STYLES ===== */
 .scroll-pane {
     -fx-background-color: transparent;
-    -fx-border-color: #48CAE4;
+    -fx-border-color: #000000;
     -fx-border-width: 2;
     -fx-border-radius: 5;
-}
-
-.scroll-pane .viewport {
-    -fx-background-color: white;
-}
-
-/* ===== CONTEXT MENU STYLES ===== */
-.context-menu {
-    -fx-background-color: white;
-    -fx-border-color: #48CAE4;
-    -fx-border-width: 2;
-}
-
-.menu-item {
-    -fx-background-color: white;
-    -fx-text-fill: #03045E;
-}
-
-.menu-item:hover {
-    -fx-background-color: #CAF0F8;
-}
-
-/* ===== TOOLTIP STYLES ===== */
-.tooltip {
-    -fx-background-color: #023E8A;
-    -fx-text-fill: white;
-    -fx-font-size: 12px;
-    -fx-background-radius: 5;
-    -fx-border-color: #0096C7;
-    -fx-border-width: 1;
-}
-
-/* ===== TAB PANE STYLES ===== */
-.tab-pane {
-    -fx-background-color: #CAF0F8;
-}
-
-.tab {
-    -fx-background-color: #90E0EF;
-    -fx-text-fill: #03045E;
-    -fx-background-radius: 5 5 0 0;
-}
-
-.tab:selected {
-    -fx-background-color: #0096C7;
-    -fx-text-fill: white;
-}
-
-.tab-pane .tab-header-area .tab-header-background {
-    -fx-background-color: #023E8A;
 }

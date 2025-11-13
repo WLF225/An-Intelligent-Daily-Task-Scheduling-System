@@ -32,6 +32,7 @@ public class MainMenu extends BorderPane {
         Button viewTasksB = new Button("View Tasks");
         Button saveToFileB = new Button("Save To File");
         Button exitB = new Button("Exit");
+        Button showDetailsB = new Button("Show details");
         exitB.getStyleClass().add("secondary");
 
         //To make the buttons larger
@@ -73,19 +74,33 @@ public class MainMenu extends BorderPane {
         //The text area that will have the answer
         TextArea textArea = new TextArea();
         textArea.setEditable(false);
-        textArea.setPrefHeight(500);
+        textArea.setPrefHeight(350);
         textArea.setPrefWidth(600);
-        textArea.setMaxHeight(500);
+        textArea.setMaxHeight(350);
         textArea.setMaxWidth(600);
         textArea.setWrapText(true);
 
-        VBox solutionVB = new VBox(40, calculateH, textArea);
+        VBox solutionVB = new VBox(40, calculateH, textArea,showDetailsB);
         solutionVB.setAlignment(Pos.CENTER);
 
         setCenter(solutionVB);
 
         //Buttons actions
         readFromFileB.setOnAction(new ReadFile());
+
+        saveToFileB.setOnAction(new SaveToFile());
+
+        showDetailsB.setOnAction(e->{
+            //To make sure the hours text field have a number
+            if (hoursTF.getText().isEmpty())
+                Main.showErrorAlert("Please enter the number of hours!");
+            else if (!hoursTF.getText().matches("\\d+"))
+                Main.showErrorAlert("The number of hours must be a positive number!");
+            else
+                Main.setScene(new ShowDetails(Integer.parseInt(hoursTF.getText())));
+
+
+        });
 
         exitB.setOnAction(e -> System.exit(0));
 
@@ -105,7 +120,7 @@ public class MainMenu extends BorderPane {
                 if (hoursTF.getText().isEmpty())
                     throw new AlertException("The number of hours must be entered!");
                 if (!hoursTF.getText().matches("\\d+"))
-                    throw new AlertException("The number of hours must be a number!");
+                    throw new AlertException("The number of hours must be a positive number!");
                 if (Main.tasks.length == 0)
                     throw new AlertException("There are no tasks to calculate!");
 
@@ -123,8 +138,6 @@ public class MainMenu extends BorderPane {
                 for (Task t : tasks) {
                     textArea.appendText(t.toString() + "\n\n");
                 }
-
-                hoursTF.clear();
 
             } catch (AlertException ex) {
                 Main.showErrorAlert(ex.getMessage());
