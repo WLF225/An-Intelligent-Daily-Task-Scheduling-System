@@ -16,8 +16,6 @@ public class AddTasks extends BorderPane {
 
     public AddTasks() {
 
-        getStyleClass().add("border-pane");
-
         ImageView image = new ImageView("addTask.png");
 
         setRight(image);
@@ -40,9 +38,12 @@ public class AddTasks extends BorderPane {
 
         TextField nameTF = new TextField();
         nameTF.setPromptText("Enter the task name");
+
         TextField hoursTF = new TextField();
+        hoursTF.setPromptText("Enter the number of hours");
         
         TextField productivityTF = new TextField();
+        productivityTF.setPromptText("Enter the amount of productivity");
 
         GridPane tfGP = new GridPane();
         tfGP.setHgap(20);
@@ -58,22 +59,22 @@ public class AddTasks extends BorderPane {
         tfGP.add(productivityTF, 1, 2);
 
         //Buttons section
-        Button clearButton = new Button("Clear");
-        Button addButton = new Button("Add");
-        Button backButton = new Button("Back");
-        backButton.getStyleClass().add("secondary");
+        Button clearB = new Button("Clear");
+        Button addB = new Button("Add");
+        Button backB = new Button("Back");
+        backB.getStyleClass().add("secondary");
 
-        addButton.getStyleClass().add("primary");
+        addB.getStyleClass().add("primary");
 
         //The action for the clear button
-        clearButton.setOnAction(e -> {
+        clearB.setOnAction(e -> {
             nameTF.clear();
             hoursTF.clear();
             productivityTF.clear();
         });
 
         //The action for the add's button
-        addButton.setOnAction(e -> {
+        addB.setOnAction(e -> {
             try {
                 //To make sure the hours and productivity are numbers
                 if (!hoursTF.getText().matches("\\d+"))
@@ -99,7 +100,7 @@ public class AddTasks extends BorderPane {
 
                 Main.showInfoAlert("Task added successfully!");
 
-                clearButton.fire();
+                clearB.fire();
 
             }catch (AlertException ex) {
                 Main.showErrorAlert(ex.getMessage());
@@ -107,10 +108,10 @@ public class AddTasks extends BorderPane {
         });
 
         //The action for the back button
-        backButton.setOnAction(e -> Main.setScene(new MainMenu()));
+        backB.setOnAction(e -> Main.setScene(new MainMenu()));
 
         //To add the buttons to the HBox
-        HBox buttonsH = new HBox(20,backButton, addButton, clearButton);
+        HBox buttonsH = new HBox(20, backB, addB, clearB);
         buttonsH.setAlignment(Pos.CENTER);
 
         //To add all the components but the image to the main VBox

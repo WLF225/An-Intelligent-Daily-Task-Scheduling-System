@@ -84,17 +84,21 @@ public class ViewTasks extends BorderPane {
         //The action for the delete the selected task
         deleteB.setOnAction(e -> {
             Task selectedTask = tableView.getSelectionModel().getSelectedItem();
+            deleteTask(selectedTask);
+            resetB.fire();
+        });
+
+        //The action for the edit the selected task
+        editB.setOnAction(e -> {
+            Task selectedTask = tableView.getSelectionModel().getSelectedItem();
             if (selectedTask == null)
-                Main.showErrorAlert("Please select a task from the table to delete!");
-            else {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Confirmation");
-                alert.setHeaderText(null);
-                alert.setContentText("Are you sure you want to delete " + selectedTask.getName() + " task?");
-                if (alert.showAndWait().get() == ButtonType.OK) {
-                    Algorithm.deleteTask(selectedTask);
-                    Main.showInfoAlert("Task deleted successfully!");
-                    resetB.fire();
+                Main.showErrorAlert("Please select a task from the table to edit!");
+            else{
+                for (int i = 0; i < Main.tasks.length; i++) {
+                    if (Main.tasks[i].equals(selectedTask)){
+                        Main.setScene(new EditTask(i));
+                        return;
+                    }
                 }
             }
         });
@@ -128,5 +132,30 @@ public class ViewTasks extends BorderPane {
         tableView.getColumns().addAll(nameCol, hoursCol, productivityCol);
 
         return tableView;
+    }
+
+    //To delete the selected task
+    private static void deleteTask(Task selectedTask){
+        if (selectedTask == null)
+            Main.showErrorAlert("Please select a task from the table to delete!");
+        else {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation");
+            alert.setHeaderText(null);
+            alert.setContentText("Are you sure you want to delete " + selectedTask.getName() + " task?");
+            if (alert.showAndWait().get() == ButtonType.OK) {
+
+                Task[] tasks = new Task[Main.tasks.length - 1];
+
+                for (int i = 0, j = 0; i <= tasks.length; i++) {
+                    if (!Main.tasks[i].equals(selectedTask))
+                        tasks[j++] = Main.tasks[i];
+                }
+
+                Main.tasks = tasks;
+
+                Main.showInfoAlert("Task deleted successfully!");
+            }
+        }
     }
 }

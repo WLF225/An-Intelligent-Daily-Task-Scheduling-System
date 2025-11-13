@@ -88,20 +88,6 @@ public class Algorithm {
         return finalTasks;
     }
 
-    //To delete a task from the main array
-    public static void deleteTask(Task task) {
-        if (task == null)
-            throw new AlertException("Please enter the task that you want to delete!");
-
-        Task[] tasks = new Task[Main.tasks.length - 1];
-
-        for (int i = 0, j = 0; i <= tasks.length; i++) {
-            if (!Main.tasks[i].equals(task))
-                tasks[j++] = Main.tasks[i];
-        }
-        Main.tasks = tasks;
-    }
-
     //To save the total productivity of the tasks in a certain amount of hours with the last task added
     public static class TotalProductivity {
 
