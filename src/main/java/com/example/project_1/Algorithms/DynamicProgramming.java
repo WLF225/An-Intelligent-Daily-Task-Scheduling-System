@@ -1,16 +1,14 @@
-package com.example.project_1;
+package com.example.project_1.Algorithms;
 
 import com.example.project_1.Classes.Task;
 import com.example.project_1.JavaFX.AlertException;
 import com.example.project_1.JavaFX.Main;
 
-//The class that have the main functionality that do most of the work
-public class Algorithm {
+//The class that have the dynamic programming algorithm for the knapsack problem
+public class DynamicProgramming {
 
-    public static TotalProductivity[][] Knapsack(int totalHours) {
-
+    public static TotalProductivity[][] dpSolution(int totalHours) {
         Task[] tasks = Main.tasks;
-
         //The array that will have the optimal solutions
         TotalProductivity[][] dp = (TotalProductivity[][]) new TotalProductivity[tasks.length + 1][totalHours + 1];
 
@@ -19,20 +17,16 @@ public class Algorithm {
                 dp[i][j] = new TotalProductivity();
             }
         }
-
         //To go through all the activities
         for (int i = 0; i < tasks.length; i++) {
             //To go through all the hours I have in every tasks
             //Note: started it from the max hour to not calculate the same
             //tasks twice since I use tasks already used in the less hours
-
             for (int j = totalHours; j >= 1; j--) {
-
                 //To check if the hours i have enough to do the tasks
                 if (j - tasks[i].getHours() >= 0) {
                     //To give the current hours i have the max value of productivity
                     //for the tasks I reach
-
                     long newValue = dp[i][j - tasks[i].getHours()].totalProductivity + tasks[i].getProductivity();
 
                     if (dp[i][j].totalProductivity < newValue) {
@@ -89,6 +83,7 @@ public class Algorithm {
     //To save the total productivity of the tasks in a certain amount of hours with the last task added
     public static class TotalProductivity {
 
+        //Make it long because the sum of integers may overflow
         private long totalProductivity;
         private Task lastTask;
 

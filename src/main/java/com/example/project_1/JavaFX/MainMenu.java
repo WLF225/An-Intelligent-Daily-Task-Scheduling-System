@@ -1,6 +1,6 @@
 package com.example.project_1.JavaFX;
 
-import com.example.project_1.Algorithm;
+import com.example.project_1.Algorithms.DynamicProgramming;
 import com.example.project_1.Classes.Task;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -34,6 +34,8 @@ public class MainMenu extends BorderPane {
         Button exitB = new Button("Exit");
         Button showDetailsB = new Button("Show details");
         exitB.getStyleClass().add("secondary");
+
+        showDetailsB.setDisable(true);
 
         //To make the buttons larger
         readFromFileB.setStyle("-fx-font-size: 30");
@@ -127,17 +129,19 @@ public class MainMenu extends BorderPane {
                 int hours = Integer.parseInt(hoursTF.getText());
 
                 //To get the optimal solution for the number of hours entered by the user
-                Algorithm.TotalProductivity[][] productivities = Algorithm.Knapsack(hours);
+                DynamicProgramming.TotalProductivity[][] productivities = DynamicProgramming.dpSolution(hours);
 
                 textArea.appendText("The max number of productivity for " + hours + " hours is: " + productivities[Main.tasks.length][hours].getTotalProductivity());
                 textArea.appendText("\n\nTasks:\n\n");
 
                 //To get the tasks that give the optimal solution printed up
-                Task[] tasks = Algorithm.getTasks(productivities, hours);
+                Task[] tasks = DynamicProgramming.getTasks(productivities, hours);
 
                 for (Task t : tasks) {
                     textArea.appendText(t.toString() + "\n\n");
                 }
+
+                showDetailsB.setDisable(false);
 
             } catch (AlertException ex) {
                 Main.showErrorAlert(ex.getMessage());

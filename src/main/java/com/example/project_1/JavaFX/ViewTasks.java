@@ -1,6 +1,5 @@
 package com.example.project_1.JavaFX;
 
-import com.example.project_1.Algorithm;
 import com.example.project_1.Classes.Task;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

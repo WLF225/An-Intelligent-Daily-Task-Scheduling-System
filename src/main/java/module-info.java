@@ -10,4 +10,6 @@ module com.example.project_1 {
     opens com.example.project_1.Classes to javafx.fxml;
     exports com.example.project_1.JavaFX;
     opens com.example.project_1.JavaFX to javafx.fxml;
+    exports com.example.project_1.Algorithms;
+    opens com.example.project_1.Algorithms to javafx.fxml;
 }
